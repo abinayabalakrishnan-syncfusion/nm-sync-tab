@@ -1262,6 +1262,15 @@ var Tab = /** @class */ (function (_super) {
     };
     Tab.prototype.bindDraggable = function () {
         var _this = this;
+        // Destroy existing draggable instances
+        if (this.draggableItems && this.draggableItems.length > 0) {
+            for (var i = 0; i < this.draggableItems.length; i++) {
+                this.draggableItems[i].destroy();
+                this.draggableItems[i] = null;
+            }
+            this.draggableItems = [];
+        }
+        // Create new draggable instances only if enabled
         if (this.allowDragAndDrop) {
             var tabHeader = this.element.querySelector('.' + CLS_HEADER);
             if (tabHeader) {
